@@ -1,0 +1,36 @@
+html,
+body{
+	height: 100%;
+	width: 100%;
+}
+
+.header{
+	width: 100%;
+	height: 30%;
+	background: rgb(182, 182, 182);
+	text-align: center;
+}
+
+.contentHeader{
+	width: 90%;
+	height: auto;
+	float:left;
+}
+
+.mode{
+	margin-top: 1%;	
+	height: 50%;
+}
+
+.header .flap{
+	float:right;
+	border: 2px solid black;
+	width: 10%;
+	padding-right:10%;
+	-webkit-border-top-right-radius: 100px;
+	-webkit-border-bottom-right-radius: 100px;
+	-moz-border-radius-topright: 100px;
+	-moz-border-radius-bottomright: 100px;
+	border-top-right-radius: 100px;
+	border-bottom-right-radius: 100px;	
+}
