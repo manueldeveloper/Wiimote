@@ -16,6 +16,16 @@ function init()
 
 	// Initialize the logic nedded to change the mode
 	_modes= new Array(true, false, false, false);
+	
+	document.addEventListener("deviceready", onDeviceReady, false);
+}
+
+function onDeviceReady()
+{
+	console.log("DISPOSITIVO INICIADO");
+	
+	document.addEventListener("volumeupbutton", onVolumeUpKeyDown, false);
+	document.addEventListener("volumedownbutton", onVolumeDownKeyDown, false);
 }
 
 
@@ -69,4 +79,20 @@ function showModes()
 		document.getElementById('modesBar').style.display= 'block';
 	else
 		document.getElementById('modesBar').style.display= 'none';
+}
+
+
+// Method which receives the volume up key pressed signal
+function onVolumeUpKeyDown()
+{
+	console.log("MAS VOLUMEN");
+	alert("MAS VOLUMEN!");
+}
+
+
+//Method which receives the volume down key pressed signal
+function onVolumeDownKeyDown()
+{
+	console.log("MENOS VOLUMEN");
+	alert("MENOS VOLUMEN!");
 }
