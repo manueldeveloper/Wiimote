@@ -4,33 +4,20 @@ body{
 	width: 100%;
 }
 
-.header{
-	width: 100%;
-	height: 30%;
-	background: rgb(182, 182, 182);
-	text-align: center;
+.menuBar{
+	position: absolute;
+	z-index:2;
 }
 
-.contentHeader{
-	width: 90%;
-	height: auto;
-	float:left;
+.modesBar{
+	padding-top:5%;
+	padding-bottom:5%; 
+	background:rgb(166,166,166);
 }
 
-.mode{
-	margin-top: 1%;	
-	height: 50%;
-}
-
-.header .flap{
-	float:right;
-	border: 2px solid black;
-	width: 10%;
-	padding-right:10%;
-	-webkit-border-top-right-radius: 100px;
-	-webkit-border-bottom-right-radius: 100px;
-	-moz-border-radius-topright: 100px;
-	-moz-border-radius-bottomright: 100px;
-	border-top-right-radius: 100px;
-	border-bottom-right-radius: 100px;	
+.modeView{
+	width:100%;
+	height:100%;
+	position: absolute;
+	z-index:1;
 }

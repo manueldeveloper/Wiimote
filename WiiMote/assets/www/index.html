@@ -4,6 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link href="css/main.css" rel="stylesheet" type="text/css" />
+		<link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
 		<!-- <script type="text/javascript" src="../../js/cordova-2.5.0.js"></script> -->
 		<script type="text/javascript" src="js/wiimote.js"></script>
 		<title>WiiMotion</title>
@@ -11,24 +12,35 @@
 	
 	<body onload="init()">
 	
-		<div class="header">
-			<div class="contentHeader">
-			
-				<img id="ColorsMode" src="images/icon_colorsSelected.png" class="mode" style="margin-right:1%;" onclick="modeSelected(0)"/>
-				<img id="CrossheadMode" src="images/icon_arrowsUnselected.png" class="mode" style="margin-right:1%;" onclick="modeSelected(1)"/>
-				<img id="AccelerometerMode" src="images/icon_accelerometerUnselected.png" class="mode" style="margin-right:1%;" onclick="modeSelected(2)"/>
-				<img id="VoiceMode" src="images/icon_voiceUnselected.png" class="mode" onclick="modeSelected(3)"/>				
-			
+		<!-- Menu bar -->
+		<div class="menuBar">
+			<!-- Modes bar -->
+			<div id="modesBar" class="row-fluid modesBar">
+				<div class="span3">
+					<img id="ColorsMode" src="images/icon_colorsSelected.png" onclick="modeSelected(0)">
+				</div>				
+				<div class="span3">
+					<img id="CrossheadMode" src="images/icon_arrowsUnselected.png" onclick="modeSelected(1)">
+				</div>				
+				<div class="span3">
+					<img id="AccelerometerMode" src="images/icon_accelerometerUnselected.png" onclick="modeSelected(2)">
+				</div>				
+				<div class="span3">
+					<img id="VoiceMode" src="images/icon_voiceUnselected.png" onclick="modeSelected(3)">
+				</div>
 			</div>
-			
-			<div id="flap" class="flap">
-				<label>Hola</label>	
+		
+			<!-- Flap of the modes bar -->
+			<div class="row-fluid">
+				<div class="span4 offset4">
+					<img src="images/icon_flap.png" onclick="showModes()">
+				</div>
 			</div>
 		</div>
 		
-		<div id="contenedor" style="width:100%; height:70%; background: rgba(0, 255, 255, 1);">
-			<label>Hola</label>
-		</div>
-		
+		<!-- Mode view -->
+		<div class="container modeView">
+			<p>Esto es una prueba</p>
+		</div>		
 	</body>
 </html>

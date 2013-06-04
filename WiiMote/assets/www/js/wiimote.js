@@ -4,16 +4,40 @@ var _imageCrossheadMode;
 var _imageAccelerometerMode;
 var _imageVoiceMode;
 
+
+// Method which initializes all the application variables
 function init()
 {
+	// Get the image of the modes
 	_imageColorsMode= 				document.getElementById('ColorsMode');
 	_imageCrossheadMode= 			document.getElementById('CrossheadMode');
 	_imageAccelerometerMode= 		document.getElementById('AccelerometerMode');
 	_imageVoiceMode= 				document.getElementById('VoiceMode');
 
+	// Initialize the logic nedded to change the mode
 	_modes= new Array(true, false, false, false);
 }
 
+
+// Method which updates the logic used to the modes
+function modeSelected(mode)
+{
+	if( !_modes[mode] )
+	{
+		// Set all the modes like unselected
+		for(var i=0; i<_modes.length; ++i)
+			_modes[i]= false;
+		
+		// Set the selected mode
+		_modes[mode]= true;
+		
+		// Update the foreground of the application
+		updateForegroundModes();
+	}
+}
+
+
+// Method which updates the foreground of the application
 function updateForegroundModes()
 {
 	if( _modes[0] )
@@ -38,15 +62,11 @@ function updateForegroundModes()
 }
 
 
-function modeSelected(mode)
+// Method which shows or hides the modes bar
+function showModes()
 {
-	if( !_modes[mode] )
-	{
-		for(var i=0; i<_modes.length; ++i)
-			_modes[i]= false;
-			
-		_modes[mode]= true;
-		
-		updateForegroundModes();
-	}
+	if( document.getElementById('modesBar').style.display == 'none')
+		document.getElementById('modesBar').style.display= 'block';
+	else
+		document.getElementById('modesBar').style.display= 'none';
 }
