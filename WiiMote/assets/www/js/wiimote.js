@@ -17,13 +17,16 @@ function init()
 	// Initialize the logic nedded to change the mode
 	_modes= new Array(true, false, false, false);
 	
+	// Initialize the signal receivers
 	document.addEventListener("deviceready", onDeviceReady, false);
+	document.body.addEventListener('touchmove', function(e){e.preventDefault();}, false); // Scroll disable
 }
 
+
+// Method which indicates that the device is ready
 function onDeviceReady()
 {
-	console.log("DISPOSITIVO INICIADO");
-	
+	// Start listeners
 	document.addEventListener("volumeupbutton", onVolumeUpKeyDown, false);
 	document.addEventListener("volumedownbutton", onVolumeDownKeyDown, false);
 }
@@ -43,6 +46,44 @@ function modeSelected(mode)
 		
 		// Update the foreground of the application
 		updateForegroundModes();
+		showMode(mode);
+		
+		// Close menu bar
+		showModesBar();
+	}
+}
+
+
+// Method which updates the foreground according with the mode selected
+function showMode(mode)
+{
+	switch(mode)
+	{
+		case 0:	document.getElementById('ColorsModeView').style.display= 'block';
+				document.getElementById('CrossheadModeView').style.display= 'none';
+				document.getElementById('AccelerometerModeView').style.display= 'none';
+				document.getElementById('VoiceModeView').style.display= 'none';
+				break;
+		
+		case 1: document.getElementById('ColorsModeView').style.display= 'none';
+				document.getElementById('CrossheadModeView').style.display= 'block';
+				document.getElementById('AccelerometerModeView').style.display= 'none';
+				document.getElementById('VoiceModeView').style.display= 'none';
+				break;
+				
+		case 2: document.getElementById('ColorsModeView').style.display= 'none';
+				document.getElementById('CrossheadModeView').style.display= 'none';
+				document.getElementById('AccelerometerModeView').style.display= 'block';
+				initAcelerometer();
+				document.getElementById('VoiceModeView').style.display= 'none';
+				break;
+				
+		case 3: document.getElementById('ColorsModeView').style.display= 'none';
+				document.getElementById('CrossheadModeView').style.display= 'none';
+				document.getElementById('AccelerometerModeView').style.display= 'none';
+				document.getElementById('VoiceModeView').style.display= 'block';
+				speech();
+				break;
 	}
 }
 
@@ -73,7 +114,7 @@ function updateForegroundModes()
 
 
 // Method which shows or hides the modes bar
-function showModes()
+function showModesBar()
 {
 	if( document.getElementById('modesBar').style.display == 'none')
 		document.getElementById('modesBar').style.display= 'block';
@@ -85,7 +126,6 @@ function showModes()
 // Method which receives the volume up key pressed signal
 function onVolumeUpKeyDown()
 {
-	console.log("MAS VOLUMEN");
 	alert("MAS VOLUMEN!");
 }
 
@@ -93,6 +133,58 @@ function onVolumeUpKeyDown()
 //Method which receives the volume down key pressed signal
 function onVolumeDownKeyDown()
 {
-	console.log("MENOS VOLUMEN");
 	alert("MENOS VOLUMEN!");
+}
+
+
+// Method which calls to the recognizer prompt
+function onConversionSucess()
+{
+	  var requestCode = 12345;
+	  var maxMatches = 1;
+	  var promptString = "Habla ahora";
+	  
+	  window.plugins.speechrecognizer.startRecognize(onSuccessSpeech, onErrorSpeech, requestCode, maxMatches, promptString);
+}
+
+
+// Method which will be called when an recognition error appears
+function onConversionFail()
+{
+	alert("Could not convert the speech to text:" + error);
+}
+
+
+// Method which will be called when an recognition is done
+function onSuccessSpeech(data)
+{	
+	if (data)
+	{
+		var jsonObject = JSON.parse(data);
+		
+		// It will return the first matched text for the speech
+	     var convertedText = jsonObject.speechMatches.speechMatch[0];
+	     buttonPulsed( convertedText );
+	}
+}
+
+
+// Method which will be called when an recognition error appears
+function onErrorSpeech(error)
+{
+	alert("Conversion failed due to: " + error);
+}
+
+
+// Method which indicates the action executed
+function buttonPulsed(button)
+{
+	alert(button);
+}
+
+
+// Method which starts up the recognition process
+function speech()
+{
+	window.plugins.speechrecognizer.init(onConversionSucess, onConversionFail);
 }
